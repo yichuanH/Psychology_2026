@@ -1549,50 +1549,70 @@
                 });
             }
         });
+            // 顯示出席記錄
+    function showAttendance() {
+        const attendanceSection = document.getElementById('attendanceSection');
+        const bonusSection = document.getElementById('bonusSection');
 
-        // 顯示出席記錄
-        function showAttendance() {
-            document.getElementById('attendanceSection').classList.add('active');
-            renderAttendanceTable(attendanceData);
-            updateStats(attendanceData);
-        }
+        // 先關閉另一區
+        bonusSection.classList.remove('active');
 
-        // 隱藏出席記錄
-        function hideAttendance() {
-            document.getElementById('attendanceSection').classList.remove('active');
-        }
+        // 打開自己
+        attendanceSection.classList.add('active');
+        renderAttendanceTable(attendanceData);
+        updateStats(attendanceData);
 
-        // 渲染加分名單
-        function renderBonusLists() {
-            const list0303 = document.getElementById('bonus0303List');
-            const list0310 = document.getElementById('bonus0310List');
+        // 自動捲動到該區塊
+        attendanceSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 
-            list0303.innerHTML = '';
-            list0310.innerHTML = '';
+    // 隱藏出席記錄
+    function hideAttendance() {
+        document.getElementById('attendanceSection').classList.remove('active');
+    }
 
-            bonusData['0303'].forEach((student, index) => {
-                const li = document.createElement('li');
-                li.textContent = `${index + 1}. ${student['姓名']} (${student['學號']})`;
-                list0303.appendChild(li);
-            });
+    // 顯示加分名單
+    function showBonus() {
+        const attendanceSection = document.getElementById('attendanceSection');
+        const bonusSection = document.getElementById('bonusSection');
 
-            bonusData['0310'].forEach((student, index) => {
-                const li = document.createElement('li');
-                li.textContent = `${index + 1}. ${student['姓名']} (${student['學號']})`;
-                list0310.appendChild(li);
-            });
-        }
+        // 先關閉另一區
+        attendanceSection.classList.remove('active');
 
-        // 顯示加分名單
-        function showBonus() {
-            document.getElementById('bonusSection').classList.add('active');
-            renderBonusLists();
-        }
+        // 打開自己
+        bonusSection.classList.add('active');
+        renderBonusLists();
 
-        // 隱藏加分名單
-        function hideBonus() {
-            document.getElementById('bonusSection').classList.remove('active');
-        }
+        // 自動捲動到該區塊
+        bonusSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // 渲染加分名單
+function renderBonusLists() {
+    const list0303 = document.getElementById('bonus0303List');
+    const list0310 = document.getElementById('bonus0310List');
+
+    list0303.innerHTML = '';
+    list0310.innerHTML = '';
+
+    bonusData['0303'].forEach((student, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${index + 1}. ${student['姓名']} (${student['學號']})`;
+        list0303.appendChild(li);
+    });
+
+    bonusData['0310'].forEach((student, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${index + 1}. ${student['姓名']} (${student['學號']})`;
+        list0310.appendChild(li);
+    });
+}
+
+    // 隱藏加分名單
+    function hideBonus() {
+        document.getElementById('bonusSection').classList.remove('active');
+    }
+        
     </script>
 </body>
 </html>
