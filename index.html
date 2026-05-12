@@ -46,7 +46,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 導航卡片 */
         .nav-section {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -104,7 +103,6 @@
             display: block;
         }
 
-        /* 出缺席記錄區 */
         .attendance-section {
             background: white;
             padding: 30px;
@@ -148,7 +146,6 @@
             background: #c0392b;
         }
 
-        /* 搜尋框 */
         .search-box {
             width: 100%;
             padding: 12px 20px;
@@ -165,10 +162,10 @@
             box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
         }
 
-        /* 出席表格 */
         .attendance-table-container {
             max-height: 600px;
             overflow-y: auto;
+            overflow-x: auto;
             border: 1px solid #ddd;
             border-radius: 8px;
         }
@@ -176,6 +173,7 @@
         .attendance-table {
             width: 100%;
             border-collapse: collapse;
+            min-width: 900px;
         }
 
         .attendance-table thead {
@@ -188,14 +186,30 @@
         .attendance-table th {
             background: #667eea;
             color: white;
-            padding: 15px;
+            padding: 12px 10px;
+            text-align: center;
+            font-size: 0.95em;
+            white-space: nowrap;
+        }
+
+        .attendance-table th:nth-child(1),
+        .attendance-table th:nth-child(2),
+        .attendance-table th:nth-child(3) {
             text-align: left;
-            font-size: 1.1em;
+            position: sticky;
         }
 
         .attendance-table td {
-            padding: 12px 15px;
+            padding: 10px 12px;
             border-bottom: 1px solid #eee;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .attendance-table td:nth-child(1),
+        .attendance-table td:nth-child(2),
+        .attendance-table td:nth-child(3) {
+            text-align: left;
         }
 
         .attendance-table tbody tr:hover {
@@ -213,7 +227,7 @@
         }
 
         .status-na {
-            color: #95a5a6;
+            color: #bdc3c7;
         }
 
         .status-leave {
@@ -225,10 +239,10 @@
             display: inline-block;
             background: linear-gradient(135deg, #f39c12, #e67e22);
             color: white;
-            padding: 3px 8px;
-            border-radius: 5px;
-            font-size: 0.8em;
-            margin-left: 5px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            margin-left: 4px;
             font-weight: bold;
         }
 
@@ -248,7 +262,7 @@
 
         .bonus-lists {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
             margin-top: 20px;
         }
@@ -263,7 +277,7 @@
         .bonus-list h3 {
             color: #333;
             margin-bottom: 15px;
-            font-size: 1.3em;
+            font-size: 1.2em;
         }
 
         .bonus-list ul {
@@ -271,8 +285,9 @@
         }
 
         .bonus-list li {
-            padding: 8px 0;
+            padding: 6px 0;
             border-bottom: 1px solid #ddd;
+            font-size: 0.95em;
         }
 
         .bonus-list li:last-child {
@@ -281,26 +296,26 @@
 
         .stats-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
             margin-bottom: 25px;
         }
 
         .stat-card {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
             text-align: center;
         }
 
         .stat-card h3 {
-            font-size: 2.5em;
-            margin-bottom: 5px;
+            font-size: 2em;
+            margin-bottom: 4px;
         }
 
         .stat-card p {
-            font-size: 1.1em;
+            font-size: 0.95em;
             opacity: 0.9;
         }
 
@@ -311,7 +326,6 @@
             margin-top: 40px;
         }
 
-        /* 響應式設計 */
         @media (max-width: 768px) {
             header h1 {
                 font-size: 2em;
@@ -322,7 +336,7 @@
             }
 
             .attendance-table {
-                font-size: 0.9em;
+                font-size: 0.85em;
             }
         }
     </style>
@@ -334,7 +348,6 @@
             <p>Art Psychology Course - 2026 Spring</p>
         </header>
 
-        <!-- 主要導航 -->
         <div class="nav-section">
             <div class="nav-card" onclick="showAttendance()">
                 <div class="nav-card-icon">📋</div>
@@ -365,33 +378,18 @@
             </div>
         </div>
 
-        <!-- 出缺席記錄區域 -->
         <div class="attendance-section" id="attendanceSection">
             <div class="attendance-header">
                 <h2>📊 出缺席記錄</h2>
                 <button class="close-btn" onclick="hideAttendance()">關閉</button>
             </div>
 
-            <!-- 統計資訊 -->
-            <div class="stats-section">
-                <div class="stat-card">
-                    <h3 id="totalStudents">0</h3>
-                    <p>總修課人數</p>
-                </div>
-                <div class="stat-card">
-                    <h3 id="attendance0303">0</h3>
-                    <p>3/3 出席人數</p>
-                </div>
-                <div class="stat-card">
-                    <h3 id="attendance0310">0</h3>
-                    <p>3/10 出席人數</p>
-                </div>
+            <div class="stats-section" id="statsSection">
+                <!-- 由 JS 動態產生 -->
             </div>
 
-            <!-- 搜尋框 -->
             <input type="text" class="search-box" id="searchBox" placeholder="🔍 搜尋姓名或學號...">
 
-            <!-- 出席表格 -->
             <div class="attendance-table-container">
                 <table class="attendance-table">
                     <thead>
@@ -399,38 +397,30 @@
                             <th>姓名</th>
                             <th>學號</th>
                             <th>分組</th>
-                            <th>2026-03-03 (第一組)</th>
+                            <th>2026-03-03 (部分組別)</th>
                             <th>2026-03-10 (全員)</th>
+                            <th>2026-03-17 (部分組別)</th>
+                            <th>2026-03-31 (部分組別)</th>
+                            <th>2026-04-07 (全員)</th>
+                            <th>2026-03-24 (全員)</th>
+                            <th>2026-04-14 (部分組別)</th>
+                            <th>2026-04-21 (全員)</th>
+                            <th>2026-04-28 (部分組別)</th>
+                            <th>2026-05-05 (全員)</th>
                         </tr>
                     </thead>
-                    <tbody id="attendanceTableBody">
-                        <!-- 資料將透過 JavaScript 動態載入 -->
-                    </tbody>
+                    <tbody id="attendanceTableBody"></tbody>
                 </table>
             </div>
         </div>
 
-        <!-- 加分名單區域 -->
         <div class="bonus-section" id="bonusSection">
             <div class="attendance-header">
                 <h2>⭐ 課堂參與加分名單</h2>
                 <button class="close-btn" onclick="hideBonus()">關閉</button>
             </div>
-
-            <div class="bonus-lists">
-                <div class="bonus-list">
-                    <h3>📅 2026-03-03 加分名單</h3>
-                    <ul id="bonus0303List">
-                        <!-- 將透過 JavaScript 動態載入 -->
-                    </ul>
-                </div>
-
-                <div class="bonus-list">
-                    <h3>📅 2026-03-10 加分名單</h3>
-                    <ul id="bonus0310List">
-                        <!-- 將透過 JavaScript 動態載入 -->
-                    </ul>
-                </div>
+            <div class="bonus-lists" id="bonusLists">
+                <!-- 由 JS 動態產生 -->
             </div>
         </div>
 
@@ -440,7 +430,6 @@
     </div>
 
     <script>
-        // 出席資料（直接嵌入）
         const attendanceData = [
         {
                 "姓名": "姜梓庭",
@@ -2468,8 +2457,6 @@
                 "2026-05-05": "✗ 缺席"
         }
 ];
-
-        // 加分資料（直接嵌入）
         const bonusData = {
         "0303": [
                 {
@@ -3017,82 +3004,91 @@
         ]
 };
 
-        // 檢查學生是否有加分
-        function hasBonus(studentId, date) {
-            const dateKey = date === '2026-03-03' ? '0303' : '0310';
-            return bonusData[dateKey] && bonusData[dateKey].some(s => s['學號'] === studentId);
+        // 取得所有日期欄位（排除姓名/學號/分組）
+        const dateCols = Object.keys(attendanceData[0]).filter(k => !['姓名','學號','分組'].includes(k));
+
+        // 將日期欄位轉為 bonusData 的 key (2026-03-10 -> 0310)
+        function dateToKey(col) {
+            const parts = col.split('-');
+            return parts[1] + parts[2];
         }
 
-        // 渲染出席表格
+        function statusClass(val) {
+            if (!val) return 'status-na';
+            if (val.includes('✓')) return 'status-present';
+            if (val.includes('✗')) return 'status-absent';
+            if (val.includes('🏥')) return 'status-leave';
+            return 'status-na';
+        }
+
         function renderAttendanceTable(data) {
             const tbody = document.getElementById('attendanceTableBody');
             tbody.innerHTML = '';
 
             data.forEach(record => {
                 const row = document.createElement('tr');
+                let cells = `<td>${record['姓名']}</td><td>${record['學號']}</td><td>${record['分組']}</td>`;
 
-                // 判斷 0303 狀態樣式
-                let status0303Class = 'status-na';
-                if (record['2026-03-03'].includes('✓')) {
-                    status0303Class = 'status-present';
-                } else if (record['2026-03-03'].includes('✗')) {
-                    status0303Class = 'status-absent';
-                } else if (record['2026-03-03'].includes('🏥')) {
-                    status0303Class = 'status-leave';
-                }
+                dateCols.forEach(col => {
+                    const val = record[col] || '';
+                    const cls = statusClass(val);
+                    const key = dateToKey(col);
+                    const hasB = bonusData[key] && bonusData[key].some(s => s['學號'] === record['學號']);
+                    const badge = hasB ? '<span class="bonus-badge">⭐</span>' : '';
+                    cells += `<td class="${cls}">${val}${badge}</td>`;
+                });
 
-                const status0310Class = record['2026-03-10'].includes('✓') ? 'status-present' : 'status-absent';
-
-                // 檢查是否有加分
-                const bonus0303 = hasBonus(record['學號'], '2026-03-03') ? '<span class="bonus-badge">⭐ 加分</span>' : '';
-                const bonus0310 = hasBonus(record['學號'], '2026-03-10') ? '<span class="bonus-badge">⭐ 加分</span>' : '';
-
-                row.innerHTML = `
-                    <td>${record['姓名']}</td>
-                    <td>${record['學號']}</td>
-                    <td>${record['分組']}</td>
-                    <td class="${status0303Class}">${record['2026-03-03']}${bonus0303}</td>
-                    <td class="${status0310Class}">${record['2026-03-10']}${bonus0310}</td>
-                `;
-
+                row.innerHTML = cells;
                 tbody.appendChild(row);
             });
         }
 
-        // 更新統計資訊
         function updateStats(data) {
-            document.getElementById('totalStudents').textContent = data.length;
-
-            const attendance0303 = data.filter(r => r['2026-03-03'].includes('✓')).length;
-            const attendance0310 = data.filter(r => r['2026-03-10'].includes('✓')).length;
-
-            document.getElementById('attendance0303').textContent = attendance0303;
-            document.getElementById('attendance0310').textContent = attendance0310;
+            const section = document.getElementById('statsSection');
+            let html = `<div class="stat-card"><h3>${data.length}</h3><p>總修課人數</p></div>`;
+            dateCols.forEach(col => {
+                const count = data.filter(r => (r[col] || '').includes('✓')).length;
+                const mmdd = col.slice(5).replace('-','/');
+                html += `<div class="stat-card"><h3>${count}</h3><p>${mmdd} 出席</p></div>`;
+            });
+            section.innerHTML = html;
         }
 
-        // 搜尋功能
+        function renderBonusLists() {
+            const container = document.getElementById('bonusLists');
+            container.innerHTML = '';
+            Object.keys(bonusData).forEach(key => {
+                const list = bonusData[key];
+                if (!list || list.length === 0) return;
+                const mmdd = key.slice(0,2) + '/' + key.slice(2);
+                const div = document.createElement('div');
+                div.className = 'bonus-list';
+                div.innerHTML = `<h3>📅 2026-${key.slice(0,2)}-${key.slice(2)} 加分名單 (${list.length} 人)</h3>
+                    <ul>${list.map((s,i) => `<li>${i+1}. ${s['姓名']} (${s['學號']})</li>`).join('')}</ul>`;
+                container.appendChild(div);
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const searchBox = document.getElementById('searchBox');
             if (searchBox) {
                 searchBox.addEventListener('input', function() {
-                    const searchTerm = this.value.toLowerCase();
-                    const filteredData = attendanceData.filter(record =>
-                        record['姓名'].toLowerCase().includes(searchTerm) ||
-                        record['學號'].toLowerCase().includes(searchTerm) ||
-                        record['分組'].toLowerCase().includes(searchTerm)
+                    const term = this.value.toLowerCase();
+                    const filtered = attendanceData.filter(r =>
+                        r['姓名'].toLowerCase().includes(term) ||
+                        r['學號'].toLowerCase().includes(term) ||
+                        r['分組'].toLowerCase().includes(term)
                     );
-                    renderAttendanceTable(filteredData);
+                    renderAttendanceTable(filtered);
                 });
             }
         });
 
-        // 隱藏所有頁面
         function hideAllSections() {
             document.getElementById('attendanceSection').classList.remove('active');
             document.getElementById('bonusSection').classList.remove('active');
         }
 
-        // 顯示出席記錄
         function showAttendance() {
             hideAllSections();
             document.getElementById('attendanceSection').classList.add('active');
@@ -3100,43 +3096,15 @@
             updateStats(attendanceData);
         }
 
-        // 隱藏出席記錄
-        function hideAttendance() {
-            hideAllSections();
-        }
+        function hideAttendance() { hideAllSections(); }
 
-        // 渲染加分名單
-        function renderBonusLists() {
-            const list0303 = document.getElementById('bonus0303List');
-            const list0310 = document.getElementById('bonus0310List');
-
-            list0303.innerHTML = '';
-            list0310.innerHTML = '';
-
-            bonusData['0303'].forEach((student, index) => {
-                const li = document.createElement('li');
-                li.textContent = `${index + 1}. ${student['姓名']} (${student['學號']})`;
-                list0303.appendChild(li);
-            });
-
-            bonusData['0310'].forEach((student, index) => {
-                const li = document.createElement('li');
-                li.textContent = `${index + 1}. ${student['姓名']} (${student['學號']})`;
-                list0310.appendChild(li);
-            });
-        }
-
-        // 顯示加分名單
         function showBonus() {
             hideAllSections();
             document.getElementById('bonusSection').classList.add('active');
             renderBonusLists();
         }
 
-        // 隱藏加分名單
-        function hideBonus() {
-            hideAllSections();
-        }
+        function hideBonus() { hideAllSections(); }
     </script>
 </body>
 </html>
